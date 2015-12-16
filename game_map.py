@@ -7,6 +7,7 @@ import sys
 
 
 class GameMap(object):
+
     """
     The game map, contains a lot of cells.
 
@@ -17,18 +18,19 @@ class GameMap(object):
         size: a tuple shows the map's rows and columns
         cells: a grid contains all the cells
     """
-    
+
     MAX_MAP_SIZE = 100
     MAX_CELL_VALUE = 1
     MIN_CELL_VALUE = 0
     DIRECTIONS = (
-        (0, 1, ),
-        (1, -1, ),
-        (-1, 0, ),
-        (1, -1, ),
-        (-1, -1, ),
-        (-1, 0, ),
-        (-1, -1, ),
+        (-1, 1,),
+        (-1, 0,),
+        (-1, -1,),
+        (0, 1,),
+        (0, -1,),
+        (1, 1,),
+        (1, 0,),
+        (1, -1,)
     )
 
     def __init__(self, rows, cols):
@@ -81,8 +83,12 @@ class GameMap(object):
             d_col = col + d[1]
             if d_row >= self.rows:
                 d_row -= self.rows
+            elif d_row < 0:
+                d_row += self.rows
             if d_col >= self.cols:
                 d_col -= self.cols
+            elif d_col < 0:
+                d_col += self.cols
             count += self.cells[d_col][d_row]
         return count
 
